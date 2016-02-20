@@ -5,6 +5,8 @@ import org.scribe.builder.api.FlickrApi;
 import org.scribe.builder.api.TwitterApi;
 
 import android.content.Context;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.codepath.oauth.OAuthBaseClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -40,8 +42,17 @@ public class TwitterClientA extends OAuthBaseClient {
 		params.put("count", 25);
 		params.put("since_id", 1);
 
-		client.get(apiUrl,params,handler);
+		client.get(apiUrl, params, handler);
 
+	}
+
+	public void composeTweet(AsyncHttpResponseHandler handler, String tweetText){
+		String apiUrl = getApiUrl("statuses/update.json");
+		RequestParams params=new RequestParams();
+		params.put("status", tweetText);
+
+		client.post(apiUrl, params, handler);
+		Log.e("DEBUG", "HERE");
 	}
 
 	//COMPOSE A TWEET

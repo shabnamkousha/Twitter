@@ -1,6 +1,6 @@
 package com.codepath.apps.twitterclient;
 
-import android.content.Intent;
+import android.content.AsyncQueryHandler;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,7 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.ListView;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.codepath.apps.twitterclient.R;
 import com.codepath.apps.twitterclient.models.Tweet;
@@ -18,45 +19,32 @@ import org.apache.http.Header;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-
-public class TimelineActivity extends AppCompatActivity {
-
+public class SendTweetActivity extends AppCompatActivity {
     private TwitterClientA client;
-    private TweetsArrayAdapter aTweets;
-    private ArrayList<Tweet> tweets;
-    private ListView lvTweets;
+    EditText tweetMessage;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_timeline);
+        setContentView(R.layout.activity_send_tweet);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        Intent i = new Intent(this, SendTweetActivity .class);
-        startActivity(i);
-
-        lvTweets=(ListView) findViewById(R.id.lvTweets);
-        tweets=new ArrayList<>();
-        aTweets=new TweetsArrayAdapter(this, tweets);
-
-        lvTweets.setAdapter(aTweets);
-
+        tweetMessage= (EditText) findViewById(R.id.etTweet);
         client = TwitterApplication.getRestClient();
-        populateTimeline();
 
     }
 
-    //Send request + Fill the list view
-    public void populateTimeline(){
-        client.getHomeTimeline(new JsonHttpResponseHandler() {
+    public void tweetClicked (View view){
+
+        String stringTweet=tweetMessage.getText().toString();
+
+        client.composeTweet(new JsonHttpResponseHandler() {
             // Success
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray  json) {
-                //Log.e("Debug", json.toString());
+            public void onSuccess(int statusCode, Header[] headers, JSONArray json) {
 
-                aTweets.addAll(Tweet.fromJSONArray(json));
+                Log.e("Debug", json.toString());
 
             }
 
@@ -64,8 +52,7 @@ public class TimelineActivity extends AppCompatActivity {
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 Log.e("Error", errorResponse.toString());
             }
-        });
+        }, stringTweet);
     }
-
 
 }

@@ -31,7 +31,7 @@ public class Tweet {
     public String getCreatedAt() {
         return createdAt;
     }
-//private User user;
+
 
     public static Tweet fromJSON(JSONObject jsonObject){
         Tweet tweet= new Tweet();
