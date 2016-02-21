@@ -46,12 +46,27 @@ public class TimelineActivity extends AppCompatActivity {
         lvTweets.setAdapter(aTweets);
 
         client = TwitterApplication.getRestClient();
-        populateTimeline(); //SK FOR NOW
+        populateTimeline(0);
+
+        lvTweets.setOnScrollListener(new EndlessScrollListener() {
+            @Override
+            public boolean onLoadMore(int page, int totalItemsCount) {
+                // Triggered only when new data needs to be appended to the list
+                // Add whatever code is needed to append new items to your AdapterView
+                customLoadMoreDataFromApi(page);
+                // or customLoadMoreDataFromApi(totalItemsCount);
+                return true; // ONLY if more data is actually being loaded; false otherwise.
+            }
+        });
 
     }
 
+    public void customLoadMoreDataFromApi(int offset) {
+        populateTimeline(offset);
+    }
+
     //Send request + Fill the list view
-    public void populateTimeline(){
+    public void populateTimeline(int page){
         client.getHomeTimeline(new JsonHttpResponseHandler() {
             // Success
             @Override
@@ -66,7 +81,7 @@ public class TimelineActivity extends AppCompatActivity {
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 Log.e("Error", errorResponse.toString());
             }
-        });
+        }, page);
     }
 
     // Inflate the menu; this adds items to the action bar if it is present.
@@ -105,9 +120,8 @@ public class TimelineActivity extends AppCompatActivity {
             Tweet newTweet=new Tweet();
             newTweet.makeTweet(stringTweet);
 
-            tweets.add(0,newTweet);
+            tweets.add(0, newTweet);
             aTweets.notifyDataSetChanged();
-            //Log.e("DEBUG","hi");
 
         }
     }
