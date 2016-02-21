@@ -17,6 +17,8 @@ import java.util.ArrayList;
 public class Tweet {
     private String body;
     private long uid; //DB id for the tweet
+    private String createdAt;
+    private User user;
 
     public void setBody(String body) {
         this.body = body;
@@ -34,13 +36,12 @@ public class Tweet {
         this.user = user;
     }
 
-    private String createdAt;
+
 
     public User getUser() {
         return user;
     }
 
-    private User user;
 
     public String getBody() {
         return body;

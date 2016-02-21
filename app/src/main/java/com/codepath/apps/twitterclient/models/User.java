@@ -62,7 +62,7 @@ public class User {
     public void makeUser(){
         this.setProfileImageUrl("https://pbs.twimg.com/profile_images/701307328591634432/DhYP6321_bigger.jpg");
         this.setScreenName("shabkou");
-        this.setName("shabkou");
+        this.setName("Shabnam Kousha");
     }
 }
 

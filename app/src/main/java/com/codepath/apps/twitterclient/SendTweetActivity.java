@@ -46,7 +46,7 @@ public class SendTweetActivity extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, JSONObject json) {
 
                 String stringTweet=tweetMessage.getText().toString();
-                Log.e("Debug", stringTweet);
+                //Log.e("Debug", stringTweet);
                 Intent data = new Intent();
 
                 data.putExtra("stringTweet", stringTweet);
