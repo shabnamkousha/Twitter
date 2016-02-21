@@ -1,6 +1,7 @@
 package com.codepath.apps.twitterclient;
 
 import android.content.AsyncQueryHandler;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -42,9 +43,18 @@ public class SendTweetActivity extends AppCompatActivity {
         client.composeTweet(new JsonHttpResponseHandler() {
             // Success
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray json) {
+            public void onSuccess(int statusCode, Header[] headers, JSONObject json) {
 
-                Log.e("Debug", json.toString());
+                String stringTweet=tweetMessage.getText().toString();
+                Log.e("Debug", stringTweet);
+                Intent data = new Intent();
+
+                data.putExtra("stringTweet", stringTweet);
+
+
+                // Activity finished ok, return the data
+                setResult(RESULT_OK, data); // set result code and bundle data for response
+                finish(); // closes the activity, pa
 
             }
 

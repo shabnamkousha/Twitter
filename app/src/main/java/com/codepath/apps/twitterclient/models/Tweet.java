@@ -1,5 +1,7 @@
 package com.codepath.apps.twitterclient.models;
 
+import android.text.format.Time;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,6 +14,23 @@ import java.util.ArrayList;
 public class Tweet {
     private String body;
     private long uid; //DB id for the tweet
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    public void setUid(long uid) {
+        this.uid = uid;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     private String createdAt;
 
     public User getUser() {
@@ -63,6 +82,20 @@ public class Tweet {
         }
 
         return tweets;
+    }
+
+    public void makeTweet(String stringTweet){
+
+        this.setBody(stringTweet);
+        Time time = new Time();
+        time.setToNow();
+        this.setCreatedAt(Long.toString(time.toMillis(false)));
+        this.setUid(0);
+
+        User user=new User();
+        user.makeUser();
+        this.setUser(user);
+
     }
 
 }

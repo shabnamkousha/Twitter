@@ -7,8 +7,11 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.codepath.apps.twitterclient.R;
 import com.codepath.apps.twitterclient.models.Tweet;
@@ -18,6 +21,7 @@ import org.apache.http.Header;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.sql.Time;
 import java.util.ArrayList;
 
 public class TimelineActivity extends AppCompatActivity {
@@ -34,8 +38,6 @@ public class TimelineActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Intent i = new Intent(this, SendTweetActivity .class);
-        startActivity(i);
 
         lvTweets=(ListView) findViewById(R.id.lvTweets);
         tweets=new ArrayList<>();
@@ -44,7 +46,7 @@ public class TimelineActivity extends AppCompatActivity {
         lvTweets.setAdapter(aTweets);
 
         client = TwitterApplication.getRestClient();
-        populateTimeline();
+        populateTimeline(); //SK FOR NOW
 
     }
 
@@ -66,6 +68,50 @@ public class TimelineActivity extends AppCompatActivity {
             }
         });
     }
+
+    // Inflate the menu; this adds items to the action bar if it is present.
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.timeline, menu);
+        return true;
+    }
+
+    // Default menu function
+    @Override
+    public boolean onOptionsItemSelected(MenuItem anItem) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = anItem.getItemId();
+
+        //noinspection SimplifiableIfStatement
+
+        if (id == R.id.composeTweetBtn) {
+
+            Intent i = new Intent(TimelineActivity.this, SendTweetActivity .class);
+            startActivityForResult(i, 1);
+        }
+
+
+        return super.onOptionsItemSelected(anItem);
+    }
+
+    @Override
+    protected void onActivityResult(int aRequestCode, int aResultCode, Intent aDataSet) {
+        // REQUEST_CODE is defined above
+        if (aResultCode == RESULT_OK && aRequestCode == 1) {
+            // Extract name value from result extras
+            String stringTweet = aDataSet.getExtras().getString("stringTweet");
+            Tweet newTweet=new Tweet();
+            newTweet.makeTweet(stringTweet);
+
+            tweets.add(0,newTweet);
+            aTweets.notifyDataSetChanged();
+            //Log.e("DEBUG","hi");
+
+        }
+    }
+
 
 
 }
