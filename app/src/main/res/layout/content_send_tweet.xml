@@ -20,15 +20,18 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:hint="@string/hapenning" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/send"
         android:id="@+id/button"
+        android:layout_marginTop="60dp"
+        android:background="#4099FF"
+        android:textColor="#fff"
+        android:onClick="tweetClicked"
         android:layout_below="@+id/etTweet"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="114dp"
-        android:onClick="tweetClicked" />
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

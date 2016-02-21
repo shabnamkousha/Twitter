@@ -93,7 +93,9 @@ public class TimelineActivity extends AppCompatActivity {
     // Inflate the menu; this adds items to the action bar if it is present.
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
         getMenuInflater().inflate(R.menu.timeline, menu);
+
         return true;
     }
 
