@@ -2,6 +2,9 @@ package com.codepath.apps.twitterclient.models;
 
 import android.text.format.Time;
 
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,6 +54,15 @@ public class Tweet {
         return createdAt;
     }
 
+    public static Long findMaxId(ArrayList<Tweet> tweets){
+        Long max_id=Long.valueOf(0);
+        for(int i=0; i<tweets.size();i++){
+            if(tweets.get(i).getUid()>max_id){
+                max_id= tweets.get(i).getUid();
+            }
+        }
+        return max_id;
+    }
 
     public static Tweet fromJSON(JSONObject jsonObject){
         Tweet tweet= new Tweet();
@@ -97,5 +109,6 @@ public class Tweet {
         this.setUser(user);
 
     }
+
 
 }

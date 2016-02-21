@@ -31,6 +31,8 @@ public class TimelineActivity extends AppCompatActivity {
     private ArrayList<Tweet> tweets;
     private ListView lvTweets;
 
+    Long maxTweetId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +40,7 @@ public class TimelineActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
+        maxTweetId= Long.valueOf(0);
         lvTweets=(ListView) findViewById(R.id.lvTweets);
         tweets=new ArrayList<>();
         aTweets=new TweetsArrayAdapter(this, tweets);
@@ -46,7 +48,7 @@ public class TimelineActivity extends AppCompatActivity {
         lvTweets.setAdapter(aTweets);
 
         client = TwitterApplication.getRestClient();
-        populateTimeline(0);
+        populateTimeline(maxTweetId);
 
         lvTweets.setOnScrollListener(new EndlessScrollListener() {
             @Override
@@ -62,18 +64,22 @@ public class TimelineActivity extends AppCompatActivity {
     }
 
     public void customLoadMoreDataFromApi(int offset) {
-        populateTimeline(offset);
+        populateTimeline(maxTweetId);
     }
 
     //Send request + Fill the list view
-    public void populateTimeline(int page){
+    public void populateTimeline(Long page){
         client.getHomeTimeline(new JsonHttpResponseHandler() {
             // Success
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray  json) {
                 //Log.e("Debug", json.toString());
+                ArrayList<Tweet> tweets=new ArrayList<>();
 
-                aTweets.addAll(Tweet.fromJSONArray(json));
+                tweets=Tweet.fromJSONArray(json);
+                maxTweetId=Tweet.findMaxId(tweets);
+                aTweets.addAll(tweets);
+
 
             }
 
