@@ -39,7 +39,8 @@ public class TimelineActivity extends AppCompatActivity {
         setContentView(R.layout.activity_timeline);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        toolbar.setBackgroundColor(getResources().getColor(R.color.white));
+        toolbar.setTitleTextColor(0xFF00ACED);
         maxTweetId= Long.valueOf(0);
         lvTweets=(ListView) findViewById(R.id.lvTweets);
         tweets=new ArrayList<>();

@@ -7,6 +7,7 @@
     <string name="title_activity_send_tweet">Compose Tweet</string>
     <string name="send">Tweet</string>
     <string name="action_add">Compose Tweet</string>
+    <string name="action_logo">Twitter</string>
     <string name="hapenning">What\'s happening</string>
 
 

@@ -52,7 +52,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
+        android:text="In 0 Sec"
         android:id="@+id/tvCreated"
         android:textSize="10sp"
         android:paddingTop="3dp"

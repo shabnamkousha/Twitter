@@ -31,6 +31,9 @@ public class SendTweetActivity extends AppCompatActivity {
         setContentView(R.layout.activity_send_tweet);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setBackgroundColor(getResources().getColor(R.color.white));
+        toolbar.setTitleTextColor(0xFF00ACED);
+
         tweetMessage= (EditText) findViewById(R.id.etTweet);
         client = TwitterApplication.getRestClient();
 
