@@ -42,10 +42,11 @@ public class MentionsTimelineFragment extends TweetsListFragment{
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray json) {
                 Log.e("Debug", json.toString());
-                ArrayList<Tweet> tweets=new ArrayList<>();
+                ArrayList<Tweet> tweets = new ArrayList<>();
 
-                tweets=Tweet.fromJSONArray(json);
-               // maxTweetId=Tweet.findMaxId(tweets);
+                tweets = Tweet.fromJSONArray(json);
+                Long temp = Tweet.findMaxId(tweets);
+                setMaxTweetId(temp);
                 addAll(tweets);
 
 

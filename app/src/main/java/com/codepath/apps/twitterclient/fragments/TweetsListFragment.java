@@ -21,10 +21,22 @@ import java.util.List;
  * Created by Shabnam on 2/25/16.
  */
 
-public class TweetsListFragment extends Fragment {
+public abstract class TweetsListFragment extends Fragment {
 
     private TweetsArrayAdapter aTweets;
     private ArrayList<Tweet> tweets;
+
+    public Long getMaxTweetId() {
+        return maxTweetId;
+    }
+
+    public void setMaxTweetId(Long maxTweetId) {
+        this.maxTweetId = maxTweetId;
+    }
+
+    private Long maxTweetId;
+
+
     private ListView lvTweets;
 
 
@@ -34,18 +46,19 @@ public class TweetsListFragment extends Fragment {
 
         lvTweets=(ListView) v.findViewById(R.id.lvTweets);
         lvTweets.setAdapter(aTweets);
-
+        maxTweetId=Long.valueOf(0);
         lvTweets.setOnScrollListener(new EndlessScrollListener() {
             @Override
             public boolean onLoadMore(int page, int totalItemsCount) {
                 // Triggered only when new data needs to be appended to the list
                 // Add whatever code is needed to append new items to your AdapterView
-                customLoadMoreDataFromApi(page);
+
+                //value will be recalculated
+                populateTimeline(maxTweetId);
                 // or customLoadMoreDataFromApi(totalItemsCount);
                 return true; // ONLY if more data is actually being loaded; false otherwise.
             }
         });
-
         return v;
     }
 
@@ -56,15 +69,14 @@ public class TweetsListFragment extends Fragment {
         tweets=new ArrayList<>();
         aTweets=new TweetsArrayAdapter(getActivity(), tweets);
 
+
+
     }
 
     public void addAll(List<Tweet> tweets){
         aTweets.addAll(tweets);
     }
 
-    public void customLoadMoreDataFromApi(int offset) {
-        //populateTimeline(maxTweetId);
-    }
-
+    protected abstract void populateTimeline(Long maxId);
 
 }

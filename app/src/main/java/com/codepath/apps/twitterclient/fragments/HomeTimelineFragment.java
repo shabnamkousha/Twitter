@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.codepath.apps.twitterclient.EndlessScrollListener;
 import com.codepath.apps.twitterclient.TwitterApplication;
 import com.codepath.apps.twitterclient.TwitterClientA;
 import com.codepath.apps.twitterclient.models.Tweet;
@@ -32,6 +33,7 @@ public class HomeTimelineFragment extends TweetsListFragment{
         client = TwitterApplication.getRestClient();
 
         populateTimeline(maxTweetId);
+
     }
 
     Long maxTweetId;
@@ -46,7 +48,8 @@ public class HomeTimelineFragment extends TweetsListFragment{
                 ArrayList<Tweet> tweets=new ArrayList<>();
 
                 tweets=Tweet.fromJSONArray(json);
-                maxTweetId=Tweet.findMaxId(tweets);
+                Long temp=Tweet.findMaxId(tweets);
+                setMaxTweetId(temp);
                 addAll(tweets);
 
 
@@ -56,7 +59,8 @@ public class HomeTimelineFragment extends TweetsListFragment{
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 Log.e("Error", errorResponse.toString());
             }
-        }, page);
+        }, page) ;
+
     }
 
 }

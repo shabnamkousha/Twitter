@@ -56,13 +56,16 @@ public class Tweet {
     }
 
     public static Long findMaxId(ArrayList<Tweet> tweets){
-        Long min_id=tweets.get(0).getUid();
-        for(int i=1; i<tweets.size();i++){
-            if(tweets.get(i).getUid()<min_id){
-                min_id= tweets.get(i).getUid();
+        if(tweets.size()>0) {
+            Long min_id = tweets.get(0).getUid();
+            for (int i = 1; i < tweets.size(); i++) {
+                if (tweets.get(i).getUid() < min_id) {
+                    min_id = tweets.get(i).getUid();
+                }
             }
+            return min_id;
         }
-        return min_id;
+        return null;
     }
 
     public static Tweet fromJSON(JSONObject jsonObject){
