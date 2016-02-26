@@ -18,7 +18,7 @@ import java.util.ArrayList;
 /**
  * Created by Shabnam on 2/25/16.
  */
-public class HomeTimelineFragment extends TweetsListFragment{
+public class MentionsTimelineFragment extends TweetsListFragment{
 
     private TwitterClientA client;
 
@@ -37,16 +37,15 @@ public class HomeTimelineFragment extends TweetsListFragment{
     Long maxTweetId;
     //Send request + Fill the list view
     public void populateTimeline(Long page){
-        client.getHomeTimeline(new JsonHttpResponseHandler() {
+        client.getMentionsTimeline(new JsonHttpResponseHandler() {
             // Success
-
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray json) {
-                //Log.e("Debug", json.toString());
+                Log.e("Debug", json.toString());
                 ArrayList<Tweet> tweets=new ArrayList<>();
 
                 tweets=Tweet.fromJSONArray(json);
-                maxTweetId=Tweet.findMaxId(tweets);
+               // maxTweetId=Tweet.findMaxId(tweets);
                 addAll(tweets);
 
 
@@ -58,5 +57,4 @@ public class HomeTimelineFragment extends TweetsListFragment{
             }
         }, page);
     }
-
 }
