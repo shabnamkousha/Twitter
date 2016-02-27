@@ -11,6 +11,21 @@ public class User {
     private Long id;
     private String screenName;
     private String profileImageUrl;
+    private String tagLine;
+    private int followingsCount;
+    private int followersCount;
+
+    public String getTagLine() {
+        return tagLine;
+    }
+
+    public int getFriendsCount() {
+        return followingsCount;
+    }
+
+    public int getFollowersCount() {
+        return followersCount;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -51,7 +66,9 @@ public class User {
             u.id=json.getLong("id");
             u.screenName=json.getString("screen_name");
             u.profileImageUrl=json.getString("profile_image_url");
-
+            u.tagLine=json.getString("description");
+            u.followersCount=json.getInt("followers_count");
+            u.followingsCount=json.getInt("friends_count");
         } catch (JSONException e){
             e.printStackTrace();
         }
