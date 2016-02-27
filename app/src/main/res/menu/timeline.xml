@@ -10,4 +10,10 @@
         android:icon="@drawable/twitter"
         app:showAsAction="always" />
 
+    <item android:id="@+id/miProfile"
+        android:title="@string/action_profile"
+        android:orderInCategory="200"
+        android:icon="@drawable/ic_action_name"
+        app:showAsAction="always" />
+
 </menu>

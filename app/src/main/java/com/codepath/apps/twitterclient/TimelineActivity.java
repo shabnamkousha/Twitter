@@ -54,24 +54,9 @@ public class TimelineActivity extends AppCompatActivity {
         PagerSlidingTabStrip tabStrip= (PagerSlidingTabStrip) findViewById(R.id.tabs);
 
         tabStrip.setViewPager(vpPager);
-       /* lvTweets.setOnScrollListener(new EndlessScrollListener() {
-            @Override
-            public boolean onLoadMore(int page, int totalItemsCount) {
-                // Triggered only when new data needs to be appended to the list
-                // Add whatever code is needed to append new items to your AdapterView
-                customLoadMoreDataFromApi(page);
-                // or customLoadMoreDataFromApi(totalItemsCount);
-                return true; // ONLY if more data is actually being loaded; false otherwise.
-            }
-        });*/
+
 
     }
-
-    public void customLoadMoreDataFromApi(int offset) {
-        //populateTimeline(maxTweetId);
-    }
-
-
 
     // Inflate the menu; this adds items to the action bar if it is present.
     @Override
@@ -97,6 +82,11 @@ public class TimelineActivity extends AppCompatActivity {
             Intent i = new Intent(TimelineActivity.this, SendTweetActivity .class);
             startActivityForResult(i, 1);
         }
+        if (id == R.id.miProfile) {
+
+            Intent i = new Intent(TimelineActivity.this, ProfileActivity.class);
+            startActivityForResult(i, 2);
+        }
 
 
         return super.onOptionsItemSelected(anItem);
@@ -111,8 +101,6 @@ public class TimelineActivity extends AppCompatActivity {
             Tweet newTweet=new Tweet();
             newTweet.makeTweet(stringTweet);
 
-            //tweets.add(0, newTweet);
-            //aTweets.notifyDataSetChanged();
 
         }
     }

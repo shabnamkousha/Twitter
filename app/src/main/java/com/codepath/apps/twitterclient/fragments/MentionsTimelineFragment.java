@@ -3,7 +3,9 @@ package com.codepath.apps.twitterclient.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.Menu;
 
+import com.codepath.apps.twitterclient.R;
 import com.codepath.apps.twitterclient.TwitterApplication;
 import com.codepath.apps.twitterclient.TwitterClientA;
 import com.codepath.apps.twitterclient.models.Tweet;
@@ -14,6 +16,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import android.view.Menu;
+import android.view.MenuItem;
 
 /**
  * Created by Shabnam on 2/25/16.
@@ -58,4 +62,5 @@ public class MentionsTimelineFragment extends TweetsListFragment{
             }
         }, page);
     }
+
 }

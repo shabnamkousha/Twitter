@@ -54,7 +54,8 @@
         <activity
             android:name=".SendTweetActivity"
             android:label="@string/title_activity_send_tweet"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ProfileActivity"></activity>
     </application>
 
 </manifest>
