@@ -26,20 +26,22 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         client=TwitterApplication.getRestClient();
+        String screen_name=getIntent().getStringExtra("screen_name");
 
-        client.getUserInfo(new JsonHttpResponseHandler(){
+        client.getUserInfo(screen_name, new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 user=User.fromJson(response);
                 getSupportActionBar().setTitle("@"+user.getScreenName());
                 populateProfileHeader(user);
+                Log.e("Error", "hereeeeeeee");
 
             }
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 Log.e("Error", errorResponse.toString());
             }
         });
-        String screen_name=getIntent().getStringExtra("screen_name");
+
         if(savedInstanceState==null) {
             UserTimelineFragment fragmentUserTimeline = UserTimelineFragment.newInstance(screen_name);
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();

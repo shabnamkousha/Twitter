@@ -85,6 +85,7 @@ public class TimelineActivity extends AppCompatActivity {
         if (id == R.id.miProfile) {
 
             Intent i = new Intent(TimelineActivity.this, ProfileActivity.class);
+            i.putExtra("screen_name", "shabkou");
             startActivityForResult(i, 2);
         }
 
