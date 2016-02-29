@@ -1,9 +1,11 @@
 package com.codepath.apps.twitterclient;
 
+import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,9 +34,12 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 user=User.fromJson(response);
-                getSupportActionBar().setTitle("@"+user.getScreenName());
+                getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#00ACED\"> @" + user.getScreenName()+"</font>"));
+                getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xffffffff));
+                getSupportActionBar().setDisplayShowTitleEnabled(false);
+                getSupportActionBar().setDisplayShowTitleEnabled(true);
+
                 populateProfileHeader(user);
-                Log.e("Error", "hereeeeeeee");
 
             }
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
