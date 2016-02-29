@@ -18,7 +18,7 @@ Completed user stories:
 
 Walkthrough of all user stories:
 
-<img src="https://github.com/shabnamkousha/Twitter/blob/master/twitter.gif" alt="Video Walkthrough" style="max-width:100%;">
+<img src="https://github.com/shabnamkousha/Twitter/blob/master/twitter_Expanded5.gif" alt="Video Walkthrough" style="max-width:100%;">
 
 
 
